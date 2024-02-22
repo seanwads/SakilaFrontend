@@ -17,6 +17,9 @@ function NavBar() {
             <NavItem>
               <NavLink to="/profile">My Films</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink to="/add-film">Add New Film</NavLink>
+            </NavItem>
           </Nav>
       </Navbar>
       </>

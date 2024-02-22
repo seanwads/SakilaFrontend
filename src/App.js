@@ -13,6 +13,7 @@ import ProfilePage from './components/ProfilePage';
 import NotFound from './components/NotFound';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AddFilm from './components/AddFilm';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/film-list/:category?/:actor?" element={ <FilmList baseUrl={url}/> }/>
         <Route path="/actor/:actorId" element={ <ActorInfo /> } />
         <Route path="/edit-film/:filmId" element={ <EditFilm baseUrl={url}/>} />
+        <Route path='/add-film' element={ <AddFilm baseUrl={url} /> } />
         <Route path='/profile' element={ <ProfilePage /> } />
         <Route path='*' element={ <NotFound /> } />
       </Routes>

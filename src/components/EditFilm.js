@@ -68,9 +68,9 @@ function EditFilm({ baseUrl }) {
       {!currentFilm ? <p id="loading-text">loading...</p> :
     
       <form id="edit-film-form" onSubmit={(event) => handleSubmit(event)}>
-        <input type="text" id="filmId" name="filmId" value={currentFilm.filmId}/>
+        <input type="text" id="filmId" name="filmId" value={currentFilm.filmId} readOnly/>
         <br />
-        <input type="text" id="title" name="title" defaultValue={currentFilm.title} />
+        <input type="text" id="title" name="title" defaultValue={currentFilm.title}/>
         <br />
         <input type="text" id="description" name="description" defaultValue={currentFilm.description} />
         <br />
