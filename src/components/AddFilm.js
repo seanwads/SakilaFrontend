@@ -11,6 +11,10 @@ function AddFilm({ baseUrl }){
     const catToggle = () => setCatDropdownOpen((prevState) => !prevState);
     const [catDropdownVal, setCatDropdownVal] = useState();
 
+    const [ratDropdownOpen, setRatDropdownOpen] = useState(false);
+    const ratToggle = () => setRatDropdownOpen((prevState) => !prevState);
+    const [ratDropdownVal, setRatDropdownVal] = useState("G");
+
     useEffect(() => {
         if(isFirstLoad){
             fetchCategories();
@@ -45,7 +49,7 @@ function AddFilm({ baseUrl }){
             "description": event.target.description.value,
             "releaseYear": event.target.releaseYear.value,
             "languageId": 1,
-            "rating": event.target.rating.value,
+            "rating": ratDropdownVal,
             "categorySet": [categoryJson]
         })});
 
@@ -61,8 +65,18 @@ function AddFilm({ baseUrl }){
             <br />
             <input type="text" id="releaseYear" name="releaseYear" placeholder="release year" />
             <br />
-            {/* TODO change to dropdown */}
-            <input type="text" id="rating" name="rating" placeholder="rating" />
+            <Dropdown isOpen={ratDropdownOpen} toggle={ratToggle}>
+                <DropdownToggle caret>
+                    { ratDropdownVal }
+                </DropdownToggle>
+                <DropdownMenu>
+                    <DropdownItem onClick={() => setRatDropdownVal("G")}>G</DropdownItem>
+                    <DropdownItem onClick={() => setRatDropdownVal("PG")}>PG</DropdownItem>
+                    <DropdownItem onClick={() => setRatDropdownVal("PG-13")}>PG-13</DropdownItem>
+                    <DropdownItem onClick={() => setRatDropdownVal("R")}>R</DropdownItem>
+                    <DropdownItem onClick={() => setRatDropdownVal("NC-17")}>NC-17</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
             <br />
 
             {!categories[0] ? <p id="loading-text">loading...</p> :

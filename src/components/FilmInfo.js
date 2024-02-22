@@ -27,6 +27,17 @@ function FilmInfo({ baseUrl }) {
       }
       
     }
+
+    async function deleteFilm(){
+      const deleteConfirm = window.confirm(`Are you sure you want to delete ${currentFilm.title}?`);
+      if(deleteConfirm){
+        await fetch(baseUrl + "/film/delete/" + currentFilm.filmId, {
+          method: 'DELETE'
+        });
+        
+        navigate("/film-list");
+      }
+    }
     
     return (
       <>
@@ -43,7 +54,7 @@ function FilmInfo({ baseUrl }) {
       <br />
       <p id="film-desc">{currentFilm.description}</p>
       <br />
-      <NavLink to={`/edit-film/${filmId}`}>Edit</NavLink>
+      <NavLink to={`/edit-film/${filmId}`}>Edit</NavLink> | <NavLink onClick={() => deleteFilm()}>Delete</NavLink>
       </>
       }
       </>

@@ -30,6 +30,17 @@ function FilmList({ baseUrl }) {
     const responseJson = await response.json();
     setFilmList(responseJson);
   }
+  
+  async function deleteFilm(film){
+    const deleteConfirm = window.confirm(`Are you sure you want to delete ${film.title}?`);
+    if(deleteConfirm){
+      await fetch(baseUrl + "/film/delete/" + film.filmId, {
+        method: 'DELETE'
+      });
+
+      setFirstLoad(true);
+    }
+  }
 
     return (
       <>
@@ -50,7 +61,8 @@ function FilmList({ baseUrl }) {
               <p id="filmList-desc">{film.description}</p>
             </li>
             <li>
-              <NavLink to={`/edit-film/${film.filmId}`}>Edit</NavLink>
+              <NavLink to={`/edit-film/${film.filmId}`}>Edit</NavLink>| 
+              <NavLink onClick={() => deleteFilm(film)}>Delete</NavLink>
             </li>
           </ul>)}
       </>
