@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 function FilmInfo({ baseUrl }) {
     let { filmId } = useParams();
@@ -33,7 +33,7 @@ function FilmInfo({ baseUrl }) {
       {!currentFilm ? <p id="loading-text">Loading...</p> : 
       <>
       <h1 id="film-title">{currentFilm.title}, {currentFilm.releaseYear}</h1>
-      <p id="film-cat">{currentFilm.categorySet[0].name}</p>
+      <p id="film-cat">{currentFilm.categorySet[0] ? currentFilm.categorySet[0].name : "cat"}</p>
       <ul id="actors-list">
         Actors:
         {currentFilm.actors.map(actor => 
@@ -42,6 +42,8 @@ function FilmInfo({ baseUrl }) {
       </ul>
       <br />
       <p id="film-desc">{currentFilm.description}</p>
+      <br />
+      <NavLink to={`/edit-film/${filmId}`}>Edit</NavLink>
       </>
       }
       </>

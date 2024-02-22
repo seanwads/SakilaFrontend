@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 function FilmList({ baseUrl }) {
 
@@ -48,6 +48,9 @@ function FilmList({ baseUrl }) {
             </li>
             <li>
               <p id="filmList-desc">{film.description}</p>
+            </li>
+            <li>
+              <NavLink to={`/edit-film/${film.filmId}`}>Edit</NavLink>
             </li>
           </ul>)}
       </>
