@@ -4,7 +4,7 @@ import './common/style.css';
 
 import Search from './components/Search';
 import Footer from './components/Footer';
-import NavBar from './components/NavBar';
+import NavBar from './components/Navbar';
 import FilmInfo from './components/FilmInfo';
 import FilmList from './components/FilmList';
 import ActorInfo from './components/ActorInfo';
