@@ -1,0 +1,24 @@
+body {
+    background: rgb(255,132,80);
+    background: radial-gradient(circle, rgba(255,132,80,1) 0%, rgba(178,164,245,1) 100%);
+}
+
+h1 {
+    color: white;
+}
+
+
+
+#text-input {
+    background: none;
+    color: white;
+    border-radius: 20px;
+    width: 300px;
+    border: 2px solid white;
+    padding: 5px;
+}
+
+#search-body {
+    margin-top: 350px;
+    text-align: center;
+}
