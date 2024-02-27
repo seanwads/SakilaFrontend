@@ -54,7 +54,7 @@ function FilmInfo({ baseUrl }) {
       <br />
       <p id="film-desc">{currentFilm.description}</p>
       <br />
-      <NavLink to={`/edit-film/${filmId}`}>Edit</NavLink> | <NavLink onClick={() => deleteFilm()}>Delete</NavLink>
+      <NavLink to={`/edit-film/${filmId}`}>Edit</NavLink><p> | </p><NavLink onClick={() => deleteFilm()}>Delete</NavLink>
       </>
       }
       </>

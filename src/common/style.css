@@ -3,11 +3,17 @@ body {
     background: radial-gradient(circle, rgba(255,132,80,1) 0%, rgba(178,164,245,1) 100%);
 }
 
-h1 {
-    color: white;
+a {
+    text-decoration: none;
 }
 
+Container {
+    background: none;
+}
 
+h1, h2, h3, p, a {
+    color: white;
+}
 
 #text-input {
     background: none;
@@ -21,4 +27,38 @@ h1 {
 #search-body {
     margin-top: 350px;
     text-align: center;
+}
+
+.film-card {
+    background-color: rgba(255, 255, 255, 0.3);
+    margin-top: 5px;
+}
+
+ul.filmList-info {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+ul.filmList-filter {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li.filmList-item {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    width: 15%;
+    border-left: 1px solid white;
+}
+
+li.filmList-title {
+    float: left;
+    display: block;
+    padding: 14px 16px;
+    width: 40%;
+    border-right: 1px solid white;
 }
