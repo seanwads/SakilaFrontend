@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { Container, Row, Col } from "reactstrap";
 
 function FilmInfo({ baseUrl }) {
     let { filmId } = useParams();
@@ -40,24 +41,30 @@ function FilmInfo({ baseUrl }) {
     }
     
     return (
-      <>
-      {!currentFilm ? <p id="loading-text">Loading...</p> : 
-      <>
-      <h1 id="film-title">{currentFilm.title}, {currentFilm.releaseYear}</h1>
-      <p id="film-cat">{currentFilm.categorySet[0] ? currentFilm.categorySet[0].name : "cat"}</p>
-      <ul id="actors-list">
-        Actors:
-        {currentFilm.actors.map(actor => 
-          <li key={actor.actorId} id="actor-name">{actor.firstName} {actor.lastName}</li>
-          )}
-      </ul>
-      <br />
-      <p id="film-desc">{currentFilm.description}</p>
-      <br />
-      <NavLink to={`/edit-film/${filmId}`}>Edit</NavLink><p> | </p><NavLink onClick={() => deleteFilm()}>Delete</NavLink>
-      </>
-      }
-      </>
+      <Container>
+        <Row>
+          <Col md={{offset: 1, size: 10}} sm="12">
+            <div className="info-card">
+            {!currentFilm ? <p id="loading-text">Loading...</p> : 
+            <>
+            <h1 id="film-title">{currentFilm.title}, {currentFilm.releaseYear}</h1>
+            <p id="film-cat">{currentFilm.categorySet[0] ? currentFilm.categorySet[0].name : "cat"} | {currentFilm.rating}</p>
+            <ul id="actors-list">
+              Actors:
+              {currentFilm.actors.map(actor => 
+                <li key={actor.actorId} id="actor-name">{actor.firstName} {actor.lastName}</li>
+                )}
+            </ul>
+            <br />
+            <p id="film-desc">{currentFilm.description}</p>
+            <br />
+            <NavLink to={`/edit-film/${filmId}`}>Edit</NavLink> | <NavLink onClick={() => deleteFilm()}>Delete</NavLink>
+            </>
+            }
+            </div>
+          </Col>
+        </Row>
+      </Container>
     )
   }
   

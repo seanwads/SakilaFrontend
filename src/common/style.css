@@ -1,6 +1,7 @@
 body {
     background: rgb(255,132,80);
     background: radial-gradient(circle, rgba(255,132,80,1) 0%, rgba(178,164,245,1) 100%);
+    height: 100vh;
 }
 
 a {
@@ -11,7 +12,7 @@ Container {
     background: none;
 }
 
-h1, h2, h3, p, a {
+h1, h2, h3, p, a, li, ul, .navbar-brand {
     color: white;
 }
 
@@ -33,16 +34,28 @@ h1, h2, h3, p, a {
     background-color: rgba(255, 255, 255, 0.3);
     margin-top: 5px;
 }
+.info-card {
+    background-color: rgba(255, 255, 255, 0.3);
+    text-align: center;
+    padding: 50px;
+    margin-top: 75px;
+}
+
+ul {
+    list-style-type: none;
+    text-align: center;
+}
 
 ul.filmList-info {
-    list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
+    text-align: left;
 }
+
 ul.filmList-filter {
-    list-style-type: none;
     margin: 0;
+    margin-top: 50px;
     padding: 0;
 }
 

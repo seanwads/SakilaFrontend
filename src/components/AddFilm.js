@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Container, Row, Col } from "reactstrap";
 
 function AddFilm({ baseUrl }){
     const [isFirstLoad, setFirstLoad] = useState(true);
@@ -57,44 +57,50 @@ function AddFilm({ baseUrl }){
         navigate('/film/' + resJson.filmId);
     }
 
-    return(
-        <form id="edit-film-form" onSubmit={(event) => handleSubmit(event)}>
-            <input type="text" id="title" name="title" placeholder="title" required/>
-            <br />
-            <input type="text" id="description" name="description" placeholder="description" />
-            <br />
-            <input type="text" id="releaseYear" name="releaseYear" placeholder="release year" />
-            <br />
-            <Dropdown isOpen={ratDropdownOpen} toggle={ratToggle}>
-                <DropdownToggle caret>
-                    { ratDropdownVal }
-                </DropdownToggle>
-                <DropdownMenu>
-                    <DropdownItem onClick={() => setRatDropdownVal("G")}>G</DropdownItem>
-                    <DropdownItem onClick={() => setRatDropdownVal("PG")}>PG</DropdownItem>
-                    <DropdownItem onClick={() => setRatDropdownVal("PG13")}>PG13</DropdownItem>
-                    <DropdownItem onClick={() => setRatDropdownVal("R")}>R</DropdownItem>
-                    <DropdownItem onClick={() => setRatDropdownVal("NC17")}>NC17</DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
-            <br />
-
-            {!categories[0] ? <p id="loading-text">loading...</p> :
-                <Dropdown isOpen={catDropdownOpen} toggle={catToggle}>
-                <DropdownToggle caret>
-                    { catDropdownVal ? catDropdownVal : categories[0].name }
-                </DropdownToggle>
-                <DropdownMenu>
-                {categories.map(cat => 
-                    <DropdownItem onClick={() => setCatDropdownVal(cat.name)}>
-                    { cat.name }
-                    </DropdownItem>)}
-                </DropdownMenu>
-                </Dropdown>
-            }
-
-            <button type="submit">Submit</button>
-        </form>
+    return (
+        <Container>
+            <Row>
+                <Col md={{offset: 1, size: 10}} sm="12">
+                    <div className="info-card">
+                        <form id="edit-film-form" onSubmit={(event) => handleSubmit(event)}>
+                            <input type="text" id="title" name="title" placeholder="title" required/>
+                            <br />
+                            <input type="text" id="description" name="description" placeholder="description" />
+                            <br />
+                            <input type="text" id="releaseYear" name="releaseYear" placeholder="release year" />
+                            <br />
+                            <Dropdown isOpen={ratDropdownOpen} toggle={ratToggle}>
+                                <DropdownToggle caret>
+                                    { ratDropdownVal }
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem onClick={() => setRatDropdownVal("G")}>G</DropdownItem>
+                                    <DropdownItem onClick={() => setRatDropdownVal("PG")}>PG</DropdownItem>
+                                    <DropdownItem onClick={() => setRatDropdownVal("PG13")}>PG13</DropdownItem>
+                                    <DropdownItem onClick={() => setRatDropdownVal("R")}>R</DropdownItem>
+                                    <DropdownItem onClick={() => setRatDropdownVal("NC17")}>NC17</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                            <br />
+                            {!categories[0] ? <p id="loading-text">loading...</p> :
+                                <Dropdown isOpen={catDropdownOpen} toggle={catToggle}>
+                                <DropdownToggle caret>
+                                    { catDropdownVal ? catDropdownVal : categories[0].name }
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                {categories.map(cat => 
+                                    <DropdownItem onClick={() => setCatDropdownVal(cat.name)}>
+                                    { cat.name }
+                                    </DropdownItem>)}
+                                </DropdownMenu>
+                                </Dropdown>
+                            }
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
