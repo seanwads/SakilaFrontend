@@ -60,5 +60,11 @@ li.filmList-title {
     display: block;
     padding: 14px 16px;
     width: 40%;
-    border-right: 1px solid white;
+}
+
+li.filmList-filter {
+    float: right;
+    display: block;
+    padding: 14px 16px;
+    width: 10%;
 }

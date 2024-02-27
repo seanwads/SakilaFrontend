@@ -72,9 +72,9 @@ function AddFilm({ baseUrl }){
                 <DropdownMenu>
                     <DropdownItem onClick={() => setRatDropdownVal("G")}>G</DropdownItem>
                     <DropdownItem onClick={() => setRatDropdownVal("PG")}>PG</DropdownItem>
-                    <DropdownItem onClick={() => setRatDropdownVal("PG-13")}>PG-13</DropdownItem>
+                    <DropdownItem onClick={() => setRatDropdownVal("PG13")}>PG13</DropdownItem>
                     <DropdownItem onClick={() => setRatDropdownVal("R")}>R</DropdownItem>
-                    <DropdownItem onClick={() => setRatDropdownVal("NC-17")}>NC-17</DropdownItem>
+                    <DropdownItem onClick={() => setRatDropdownVal("NC17")}>NC17</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
             <br />

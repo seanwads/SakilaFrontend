@@ -15,6 +15,7 @@ function FilmList({ baseUrl }) {
   const [ratDropdownOpen, setRatDropdownOpen] = useState(false);
   const ratToggle = () => setRatDropdownOpen((prevState) => !prevState);
   const [ratDropdownVal, setRatDropdownVal] = useState();
+  
 
   useEffect(() => {
     if(isFirstLoad){
@@ -47,9 +48,19 @@ function FilmList({ baseUrl }) {
     setCategories(resJson);
   }
 
-  async function filter(){
-    if(catId){
+  async function filterFilms(){
+    if(catId && ratDropdownVal){
+      const res = await fetch(`${baseUrl}/film/getByCatAndRat/${catId}/${ratDropdownVal}`);
+      const json = await res.json();
+      setFilmList(json);
+    }
+    else if(catId){
       const res = await fetch(baseUrl + "/film/getByCatId/" + catId);
+      const json = await res.json();
+      setFilmList(json);
+    }
+    else if(ratDropdownVal){
+      const res = await fetch(baseUrl + "/film/getByRating/" + ratDropdownVal);
       const json = await res.json();
       setFilmList(json);
     }
@@ -58,6 +69,13 @@ function FilmList({ baseUrl }) {
   function handleCatDropdown(category){
     setCatDropdownVal(category.name);
     setCatId(category.categoryId);
+  }
+
+  function clearFilter(){
+    setCatId(null);
+    setCatDropdownVal(null);
+    setRatDropdownVal(null);
+    fetchFullFilmList();
   }
 
     return (
@@ -69,8 +87,29 @@ function FilmList({ baseUrl }) {
           <Col md={{offset: 1, size: 10}} sm="12">
             <div className="film-card">
               <ul className="filmList-filter">
-                <li className="filmList-filter">
+                <li className="filmList-title">
                   <h2>Filter By:</h2>
+                </li>
+                <li className="filmList-filter">
+                  <Button onClick={() => clearFilter()}>Clear</Button>
+                </li>
+                <li className="filmList-filter">
+                  <Button onClick={() => filterFilms()}>Filter</Button>
+                </li>
+                <li className="filmList-filter">
+                  <Dropdown isOpen={ratDropdownOpen} toggle={ratToggle}>
+                    <DropdownToggle caret>
+                        { ratDropdownVal ? ratDropdownVal : "Rating" }
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem onClick={() => setRatDropdownVal(null)}>None</DropdownItem>
+                        <DropdownItem onClick={() => setRatDropdownVal("G")}>G</DropdownItem>
+                        <DropdownItem onClick={() => setRatDropdownVal("PG")}>PG</DropdownItem>
+                        <DropdownItem onClick={() => setRatDropdownVal("PG13")}>PG13</DropdownItem>
+                        <DropdownItem onClick={() => setRatDropdownVal("R")}>R</DropdownItem>
+                        <DropdownItem onClick={() => setRatDropdownVal("NC17")}>NC17</DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
                 </li>
                 <li className="filmList-filter">
                   {!categories[0] ? <p id="loading-text">loading...</p> :
@@ -88,24 +127,7 @@ function FilmList({ baseUrl }) {
                   </Dropdown>
                   }
                 </li>
-                <li className="filmList-filter">
-                  <Dropdown isOpen={ratDropdownOpen} toggle={ratToggle}>
-                    <DropdownToggle caret>
-                        { ratDropdownVal ? ratDropdownVal : "Rating" }
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem onClick={() => setRatDropdownVal(null)}>None</DropdownItem>
-                        <DropdownItem onClick={() => setRatDropdownVal("G")}>G</DropdownItem>
-                        <DropdownItem onClick={() => setRatDropdownVal("PG")}>PG</DropdownItem>
-                        <DropdownItem onClick={() => setRatDropdownVal("PG-13")}>PG-13</DropdownItem>
-                        <DropdownItem onClick={() => setRatDropdownVal("R")}>R</DropdownItem>
-                        <DropdownItem onClick={() => setRatDropdownVal("NC-17")}>NC-17</DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
-                </li>
-                <li className="filmList-filter">
-                  <Button onClick={() => filter()}>Filter</Button>
-                </li>
+                
               </ul>
             </div>
           </Col>
