@@ -88,7 +88,7 @@ function FilmList({ baseUrl }) {
             <div className="film-card">
               <ul className="filmList-filter">
                 <li className="filmList-title">
-                  <h2>Filter By:</h2>
+                  <h3>Filter By:</h3>
                 </li>
                 <li className="filmList-filter">
                   <Button onClick={() => clearFilter()}>Clear</Button>
@@ -133,34 +133,36 @@ function FilmList({ baseUrl }) {
           </Col>
         </Row>
       </Container>
-        {filmList.map(film => 
-          <Container>
-            <Row>
-              <Col md={{offset: 1, size: 10}} sm="12">
-                <div className='film-card'>
-                  <ul key={film.filmId} className="filmList-info">
-                    <li className="filmList-title">
-                      <NavLink to={`/film/${film.filmId}`}><h2 className="filmList-title">{film.title}</h2></NavLink>
-                    </li>
-                    <li className="filmList-item">
-                      <p className="filmList-year">{film.releaseYear}</p>
-                    </li>
-                    <li className="filmList-item">
-                      <p className="filmList-cat">{film.categorySet[0].name}</p>
-                    </li>
-                    <li className="filmList-item">
-                      <p className="filmList-rating">{film.rating}</p>
-                    </li>
-                    <li className="filmList-item">
-                      <NavLink to={`/edit-film/${film.filmId}`}>Edit</NavLink>| 
-                      <NavLink onClick={() => deleteFilm(film)}>Delete</NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-          )}
+      <Container>
+        <Row>
+          <Col md={{offset: 1, size: 10}} sm="12">
+          <div id="film-list">
+            {filmList.map(film => 
+              <div className='film-card'>
+                <ul key={film.filmId} className="filmList-info">
+                  <li className="filmList-title">
+                    <NavLink to={`/film/${film.filmId}`}><h2 className="filmList-title">{film.title}</h2></NavLink>
+                  </li>
+                  <li className="filmList-item">
+                    <p className="filmList-year">{film.releaseYear}</p>
+                  </li>
+                  <li className="filmList-item">
+                    <p className="filmList-cat">{film.categorySet[0].name}</p>
+                  </li>
+                  <li className="filmList-item">
+                    <p className="filmList-rating">{film.rating}</p>
+                  </li>
+                  <li className="filmList-item">
+                    <NavLink to={`/edit-film/${film.filmId}`}>Edit</NavLink>| 
+                    <NavLink onClick={() => deleteFilm(film)}>Delete</NavLink>
+                  </li>
+                </ul>
+              </div>
+              )}
+            </div>
+          </Col>
+        </Row>
+      </Container>
       </>
       }
       </>

@@ -81,3 +81,19 @@ li.filmList-filter {
     padding: 14px 16px;
     width: 10%;
 }
+
+.list-group-item {
+    background: none;
+}
+
+#search-results {
+    overflow-y: auto;
+    height: 600px;
+    scrollbar-width: thin;
+}
+
+#film-list {
+    overflow-y: scroll;
+    height: 82vh;
+    scrollbar-width: thin;
+}
