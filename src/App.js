@@ -17,7 +17,7 @@ import AddFilm from './components/AddFilm';
 
 
 function App() {
-  const url = "http://localhost:8080";
+  const url = "http://16.171.166.101:8080";
 
   return (
     <BrowserRouter>
