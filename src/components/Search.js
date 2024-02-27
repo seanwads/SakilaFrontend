@@ -58,7 +58,7 @@ function Search({ baseUrl }) {
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={{offset: 3, size: 6}} sm="12">
+                    <Col md={{offset: 4, size: 4}} sm="12">
                         {!searchResults ? <p>loading...</p> : (
                             <div id="search-results">
                                 <ListGroup>
