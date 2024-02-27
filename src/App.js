@@ -26,7 +26,7 @@ function App() {
         <Route exact path="/" element={ <Search baseUrl={url}/> } />
         <Route path="/film/:filmId" element={ <FilmInfo baseUrl={url} />} />
         <Route path="/film-list/:category?/:actor?" element={ <FilmList baseUrl={url}/> }/>
-        <Route path="/actor/:actorId" element={ <ActorInfo /> } />
+        <Route path="/actor/:actorId" element={ <ActorInfo baseUrl={url}/> } />
         <Route path="/edit-film/:filmId" element={ <EditFilm baseUrl={url}/>} />
         <Route path='/add-film' element={ <AddFilm baseUrl={url} /> } />
         <Route path='/profile' element={ <ProfilePage /> } />

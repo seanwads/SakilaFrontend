@@ -52,7 +52,11 @@ function FilmInfo({ baseUrl }) {
             <ul id="actors-list">
               Actors:
               {currentFilm.actors.map(actor => 
-                <li key={actor.actorId} id="actor-name">{actor.firstName} {actor.lastName}</li>
+                <li key={actor.actorId} id="actor-name">
+                  <NavLink to={`/actor/${actor.actorId}`}>
+                    {actor.firstName} {actor.lastName}
+                  </NavLink>
+                </li>
                 )}
             </ul>
             <br />
