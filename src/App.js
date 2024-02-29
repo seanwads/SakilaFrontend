@@ -29,7 +29,7 @@ function App() {
         <Route path="/actor/:actorId" element={ <ActorInfo baseUrl={url}/> } />
         <Route path="/edit-film/:filmId" element={ <EditFilm baseUrl={url}/>} />
         <Route path='/add-film' element={ <AddFilm baseUrl={url} /> } />
-        <Route path='/profile' element={ <ProfilePage /> } />
+        <Route path='/profile' element={ <ProfilePage baseUrl={url}/> } />
         <Route path='*' element={ <NotFound /> } />
       </Routes>
       <Footer/>

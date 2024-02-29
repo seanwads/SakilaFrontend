@@ -16,7 +16,7 @@ h1, h2, h3, p, a, li, ul, .navbar-brand {
     color: white;
 }
 
-#text-input {
+input {
     background: none;
     color: white;
     border-radius: 20px;
@@ -100,4 +100,32 @@ li.filmList-filter {
     overflow-y: scroll;
     height: 82vh;
     scrollbar-width: thin;
+}
+
+#film-list-user {
+    overflow-y: scroll;
+    height: 70vh;
+    scrollbar-width: thin;
+}
+
+.remove-button {
+    margin: 5px;
+    padding: 0px;
+    width: 22px;
+    background-color: rgb(161, 64, 53);
+    border: none;
+    border-radius: 22px;
+}
+
+.dropdown-toggle {
+    background-color: rgb(114, 102, 175);
+    border: none;
+}
+
+#add-button {
+    background-color: rgb(168, 182, 117);
+    padding: 2px;
+    font-size: large;
+    width: 30px;
+    border: none;
 }

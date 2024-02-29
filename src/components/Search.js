@@ -3,9 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Dropdown, DropdownMenu, DropdownItem, DropdownToggle, ListGroup, ListGroupItem } from "reactstrap";
 
 function Search({ baseUrl }) {
-
-    const navigate = useNavigate();
-
     const[dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(!dropdownOpen);
     const[dropdownVal, setDropdownVal] = useState();
@@ -43,9 +40,9 @@ function Search({ baseUrl }) {
                 <Row>
                     <Col md={{offset: 3, size: 6}} sm="12">
                         <h1 id="search-title">widescreend</h1>
-                        <form id="search-bar" onSubmit={(event) => handleSubmit(event)}>
-                            <input type="text" id="text-input" placeholder="Search..."/>
-                            <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                        <form id="search-bar"  onSubmit={(event) => handleSubmit(event)}>
+                            <input type="text" data-testid="search-bar" id="text-input" placeholder="Search..."/>
+                            <Dropdown isOpen={dropdownOpen} toggle={toggle} data-testid="search-dropdown">
                                 <DropdownToggle caret>
                                     {dropdownVal ? dropdownVal : "Search For..."}
                                 </DropdownToggle>

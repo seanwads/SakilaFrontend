@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Container, Row, Col } from "reactstrap";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Container, Row, Col, Button, ListGroup, ListGroupItem } from "reactstrap";
+import { NavLink } from "react-router-dom";
 
 function EditFilm({ baseUrl }) {
     let { filmId } = useParams();
@@ -17,6 +18,10 @@ function EditFilm({ baseUrl }) {
     const ratToggle = () => setRatDropdownOpen((prevState) => !prevState);
     const [ratDropdownVal, setRatDropdownVal] = useState();
 
+    const [actorSearchVisible, setActorSearchVisible] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
+    const [addedActors, setAddedActors] = useState([]);
+
 
     useEffect(() => {
       if(isFirstLoad){
@@ -30,6 +35,7 @@ function EditFilm({ baseUrl }) {
       const response = await fetch(baseUrl + "/film/get/" + filmId);
       const resJson = await response.json();
       setCurrentFilm(await resJson);
+      setAddedActors(await resJson.actors);
     }
 
     async function fetchCategories(){
@@ -61,10 +67,30 @@ function EditFilm({ baseUrl }) {
           "releaseYear": event.target.releaseYear.value,
           "languageId": 1,
           "rating": ratDropdownVal ? ratDropdownVal : currentFilm.rating,
-          "categorySet": [categoryJson]
+          "categorySet": [categoryJson],
+          "actors": addedActors
         })});
 
         navigate("/film/" + filmId);
+    }
+
+    async function searchActor(){
+      const searchInput = document.getElementById("actor-search").value;
+      const actorRes = await fetch(baseUrl + "/actor/getByNameContains/" + searchInput);
+      const actorJson = await actorRes.json();
+      setSearchResults(actorJson);
+    }
+
+    async function addActor(actor){
+      setAddedActors([...addedActors, actor]);
+      await fetch(baseUrl + "/film/addActor/" + filmId + "/" + actor.actorId, {method: 'PUT'});
+    }
+
+    async function removeActor(actorToRemove){
+      setAddedActors(addedActors.filter(function (actor) {
+        return actor !== actorToRemove
+      }));
+      await fetch(baseUrl + "/film/removeActor/" + filmId + "/" + actorToRemove.actorId, {method: 'PUT'});
     }
 
     return (
@@ -82,7 +108,7 @@ function EditFilm({ baseUrl }) {
                 <input type="text" id="description" name="description" defaultValue={currentFilm.description} />
                 <br />
                 <input type="text" id="releaseYear" name="releaseYear" defaultValue={currentFilm.releaseYear} />
-                <br />
+                <br /><br />
                 <Dropdown isOpen={ratDropdownOpen} toggle={ratToggle}>
                   <DropdownToggle caret>
                     { ratDropdownVal ? ratDropdownVal : currentFilm.rating }
@@ -107,6 +133,32 @@ function EditFilm({ baseUrl }) {
                     </DropdownItem>)}
                   </DropdownMenu>
                 </Dropdown>
+                <br/>
+                <ul id="actors-list">
+                Actors:
+                {addedActors.map(actor => 
+                  <li key={actor.actorId} id="actor-name">
+                    <NavLink to={`/actor/${actor.actorId}`}>
+                      {actor.firstName} {actor.lastName}
+                    </NavLink><Button onClick={() => removeActor(actor)} className="remove-button">-</Button>
+                  </li>
+                  )}
+                  <li id="new-actor">
+                    {!actorSearchVisible ? <Button onClick={() => setActorSearchVisible(true)} id="add-button">+</Button> : (
+                      <>
+                      <input id="actor-search"></input>
+                      <Button id="search-button" onClick={() => searchActor()}>Search</Button>
+                      </>
+                    )}   
+                  </li>
+              </ul>
+                {!searchResults ? <p>loading...</p> : (
+                      <ListGroup>
+                              {searchResults.map((actor) => 
+                              <ListGroupItem><NavLink onClick={() => addActor(actor)}>{actor.firstName} {actor.lastName}</NavLink></ListGroupItem>
+                              )}
+                      </ListGroup>
+                )}
                 <button type="submit">Submit</button>
               </form>
               }
