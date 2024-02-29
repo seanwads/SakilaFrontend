@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Container, Row, Col } from "reactstrap";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Container, Row, Col, NavLink, Button, ListGroup, ListGroupItem } from "reactstrap";
 
 function AddFilm({ baseUrl }){
     const [isFirstLoad, setFirstLoad] = useState(true);
@@ -14,6 +14,10 @@ function AddFilm({ baseUrl }){
     const [ratDropdownOpen, setRatDropdownOpen] = useState(false);
     const ratToggle = () => setRatDropdownOpen((prevState) => !prevState);
     const [ratDropdownVal, setRatDropdownVal] = useState("G");
+
+    const [actorSearchVisible, setActorSearchVisible] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
+    const [addedActors, setAddedActors] = useState([]);
 
     useEffect(() => {
         if(isFirstLoad){
@@ -57,6 +61,22 @@ function AddFilm({ baseUrl }){
         navigate('/film/' + resJson.filmId);
     }
 
+
+
+    async function searchActor(){
+        const searchInput = document.getElementById("actor-search").value;
+        const actorRes = await fetch(baseUrl + "/actor/getByNameContains/" + searchInput);
+        const actorJson = await actorRes.json();
+        setSearchResults(actorJson);
+      }
+
+  
+      async function removeActor(actorToRemove){
+        setAddedActors(addedActors.filter(function (actor) {
+          return actor !== actorToRemove
+        }));
+      }
+
     return (
         <Container>
             <Row>
@@ -95,6 +115,32 @@ function AddFilm({ baseUrl }){
                                 </DropdownMenu>
                                 </Dropdown>
                             }
+                            <br/>
+                            {/* <ul id="actors-list">
+                            Actors:
+                                {addedActors.map(actor => 
+                                <li key={actor.actorId} id="actor-name">
+                                    <NavLink to={`/actor/${actor.actorId}`}>
+                                    {actor.firstName} {actor.lastName}
+                                    </NavLink><Button onClick={() => removeActor(actor)} className="remove-button">-</Button>
+                                </li>
+                                )}
+                                <li id="new-actor">
+                                    {!actorSearchVisible ? <Button onClick={() => setActorSearchVisible(true)} id="add-button">+</Button> : (
+                                    <>
+                                    <input id="actor-search"></input>
+                                    <Button id="search-button" onClick={() => searchActor()}>Search</Button>
+                                    </>
+                                    )}   
+                                </li>
+                            </ul>
+                            {!searchResults ? <p>loading...</p> : (
+                                <ListGroup>
+                                        {searchResults.map((actor) => 
+                                        <ListGroupItem><NavLink onClick={() => setAddedActors([...addedActors, actor])}>{actor.firstName} {actor.lastName}</NavLink></ListGroupItem>
+                                        )}
+                                </ListGroup>
+                            )} */}
                             <button type="submit">Submit</button>
                         </form>
                     </div>

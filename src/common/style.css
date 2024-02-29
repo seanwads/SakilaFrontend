@@ -129,3 +129,8 @@ li.filmList-filter {
     width: 30px;
     border: none;
 }
+
+#actors-list {
+    margin: none;
+    padding: none;
+}

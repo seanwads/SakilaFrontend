@@ -67,8 +67,7 @@ function EditFilm({ baseUrl }) {
           "releaseYear": event.target.releaseYear.value,
           "languageId": 1,
           "rating": ratDropdownVal ? ratDropdownVal : currentFilm.rating,
-          "categorySet": [categoryJson],
-          "actors": addedActors
+          "categorySet": [categoryJson]
         })});
 
         navigate("/film/" + filmId);
@@ -159,7 +158,7 @@ function EditFilm({ baseUrl }) {
                               )}
                       </ListGroup>
                 )}
-                <button type="submit">Submit</button>
+                <Button type="submit">Submit</Button>
               </form>
               }
             </div>

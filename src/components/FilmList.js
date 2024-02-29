@@ -38,7 +38,7 @@ function FilmList({ baseUrl }) {
         method: 'DELETE'
       });
 
-      setFirstLoad(true);
+      fetchFullFilmList();
     }
   }
 
